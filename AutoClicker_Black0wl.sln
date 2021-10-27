@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoClicker_Black0wl", "AutoClicker_Black0wl\AutoClicker_Black0wl.csproj", "{82054FD1-E5DD-425D-B524-C54816EA0A7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82054FD1-E5DD-425D-B524-C54816EA0A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82054FD1-E5DD-425D-B524-C54816EA0A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82054FD1-E5DD-425D-B524-C54816EA0A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82054FD1-E5DD-425D-B524-C54816EA0A7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C93B908F-A4BF-4FB2-8E5E-5E5B59690A3E}
+	EndGlobalSection
+EndGlobal

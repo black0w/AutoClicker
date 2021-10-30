@@ -22,8 +22,6 @@ namespace AutoClicker_Black0wl.User_Controls
         //Mouse actions
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
-        private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
-        private const int MOUSEEVENTF_RIGHTUP = 0x10;
 
         private GlobalKeyboardHook _globalStartHook;
 
@@ -37,6 +35,8 @@ namespace AutoClicker_Black0wl.User_Controls
         private static MultiClickerUserControl SINGLETON;
         public List<Coords> coords;
         public object SelectedItem;
+        private List<LocationForm> locations;
+        private int counter = 0;
         public static MultiClickerUserControl GetInstance() => SINGLETON;
 
         public MultiClickerUserControl()
@@ -55,50 +55,41 @@ namespace AutoClicker_Black0wl.User_Controls
             buttonHold = result.holdButton;
             coords = result.coords;
             scan_button = result.scan_button;
-            if(coords != null)
-            foreach (var cord in coords)
-            saved_locations_combobox.Items.Add(cord);
+            if (coords != null)
+                foreach (var cord in coords)
+                    saved_locations_combobox.Items.Add(cord);
         }
 
-        private void scan_positions_button_Click(object sender, EventArgs e)
-        {
-            LocationChooserForm form = new LocationChooserForm(this);
-            form.Show();
-        }
+        private void scan_positions_button_Click(object sender, EventArgs e) => new LocationChooserForm(this).Show();
+
 
         private void settings_button_Click(object sender, EventArgs e)
-             => MainForm.GetInstance().SwitchControls(new SettingsUserControl_AutoClicker(this,currentKey, buttonHold,scan_button));
+             => MainForm.GetInstance().SwitchControls(new SettingsUserControl_AutoClicker(this, currentKey, buttonHold, scan_button));
 
-        List<LocationForm> locations;
-        int counter = 0;
         private void show_locations_checkbox_Click(object sender, EventArgs e)
         {
-            
+
             if (show_locations_checkbox.Checked)
             {
                 locations = new List<LocationForm>();
                 counter = 0;
                 var selectedItem = saved_locations_combobox.SelectedItem;
-                if(selectedItem != null)
+                if (selectedItem != null)
                 {
-                    foreach(var item in ((Coords)selectedItem).Points)
+                    foreach (var item in ((Coords)selectedItem).Points)
                     {
-                        var form = new LocationForm(new Point(item.X,item.Y));
-                        // form.Location = Cursor.Position;
+                        var form = new LocationForm(new Point(item.X, item.Y));
                         form.Show();
                         form.TopMost = true;
                         locations.Add(form);
-                       // points.Add(form.Location);
                         counter++;
                     }
                 }
             }
             else
             {
-                foreach (var loc in locations)
-                    loc.Close();
+                foreach (var loc in locations) loc.Close();
                 locations.Clear();
-               // points.Clear();
             }
         }
 
@@ -109,32 +100,29 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void start_button_Click(object sender, EventArgs e)
         {
-          //  saved_locations_combobox.SelectedIndex = 0;
             isRunning = !isRunning;
             start_button.Text = isRunning ? "Stop" : "Start";
             if (isRunning)
             {
-               
                 ButtonClick(saved_locations_combobox.SelectedItem);
             }
         }
 
         private void OnKeyPressedStart(object sender, GlobalKeyboardHookEventArgs e)
         {
-            // EDT: No need to filter for VkSnapshot anymore. This now gets handled
-            // through the constructor of GlobalKeyboardHook(...).
             if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
             {
-                // Now you can access both, the key and virtual code
                 Keys loggedKey = e.KeyboardData.Key;
-
-                if (loggedKey == (Keys)Enum.Parse(typeof(Keys), start_stop_btn))
+                if (start_stop_btn != null)
                 {
-                    isRunning = !isRunning;
-                    start_button.Text = isRunning ? "Stop" : "Start";
-                    if (isRunning)
+                    if (loggedKey == (Keys)Enum.Parse(typeof(Keys), start_stop_btn))
                     {
-                        ButtonClick(saved_locations_combobox.SelectedItem);
+                        isRunning = !isRunning;
+                        start_button.Text = isRunning ? "Stop" : "Start";
+                        if (isRunning)
+                        {
+                            ButtonClick(saved_locations_combobox.SelectedItem);
+                        }
                     }
                 }
             }
@@ -147,9 +135,7 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void ClickThreadAsync(object item)
         {
-
             var sItem = item as Coords;
-            //MessageBox.Show((saved_locations_combobox.SelectedItem as Coords).Points[0].ToString());
             for (int i = 0; i < number_of_loops_numeric.Value; i++)
             {
                 foreach (var point in (sItem as Coords).Points)
@@ -161,9 +147,8 @@ namespace AutoClicker_Black0wl.User_Controls
                     Thread.Sleep((int)delay_seconds_numeric.Value * 1000);
                 }
             }
-            GetInstance().Invoke(new Action(() => { start_button.Text = isRunning ? "Stop" : "Start"; }));
             GetInstance().Invoke(new Action(() => { isRunning = false; ; }));
-           
+            GetInstance().Invoke(new Action(() => { start_button.Text = isRunning ? "Stop" : "Start"; }));
         }
 
         public void DoMouseClick(Point point)
@@ -177,7 +162,31 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void saved_locations_combobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            delete_saved_locations_btn.Show();
+        }
+
+        private void delete_saved_locations_btn_Click(object sender, EventArgs e)
+        {
+
+            if (saved_locations_combobox.SelectedItem != null)
+            {
+                foreach (var point in coords)
+                {
+                    if (point.Name == ((Coords)saved_locations_combobox.SelectedItem).Name)
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Are you sure you wish to delete this save?", "Just To Be Sure", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            coords.Remove(point);
+                            saved_locations_combobox.Items.Remove(saved_locations_combobox.SelectedItem);
+                            AutoClickerGlobalSettings.SaveAllToFile(start_stop_btn, buttonHold, coords, scan_button);
+                            delete_saved_locations_btn.Hide();
+                        }
+                        break;
+                    }
+                }
+            }
+
         }
     }
 }

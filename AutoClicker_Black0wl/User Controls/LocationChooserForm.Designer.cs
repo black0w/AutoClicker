@@ -78,6 +78,7 @@ namespace AutoClicker_Black0wl.User_Controls
             0,
             0,
             0});
+            this.location_number_numeric.ValueChanged += new System.EventHandler(this.location_number_numeric_ValueChanged);
             // 
             // scan_positions_button
             // 

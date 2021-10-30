@@ -123,5 +123,10 @@ namespace AutoClicker_Black0wl.User_Controls
             points.Clear();
             Close();
         }
+
+        private void location_number_numeric_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

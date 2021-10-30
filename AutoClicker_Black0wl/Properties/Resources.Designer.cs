@@ -123,6 +123,16 @@ namespace AutoClicker_Black0wl.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap delete {
+            get {
+                object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ff2e3fb0109540959bbd8badbda51664 {
             get {
                 object obj = ResourceManager.GetObject("ff2e3fb0109540959bbd8badbda51664", resourceCulture);

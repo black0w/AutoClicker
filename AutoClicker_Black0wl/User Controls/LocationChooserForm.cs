@@ -34,6 +34,7 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void scan_positions_button_Click(object sender, EventArgs e)
         {
+
             _globalKeyboardHook = new GlobalKeyboardHook();
             _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
 
@@ -43,6 +44,7 @@ namespace AutoClicker_Black0wl.User_Controls
             points.Clear();
             counter = 0;
             scan_positions_button.Text = "Scanning ...";
+
         }
 
         private void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
@@ -68,6 +70,7 @@ namespace AutoClicker_Black0wl.User_Controls
                     _globalKeyboardHook.Dispose();
                     scan_positions_button.Text = "Scan Positions";
                 }
+
             }
         }
 
@@ -84,7 +87,7 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            if(points.Count < 1)
+            if (points.Count < 1)
             {
                 MessageBox.Show("Please select atleast one point");
                 return;

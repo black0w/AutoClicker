@@ -116,6 +116,7 @@ namespace AutoClicker_Black0wl.User_Controls
             this.Controls.Add(this.auto_clicker_btn);
             this.Name = "MainMenuUserControl";
             this.Size = new System.Drawing.Size(275, 274);
+            this.Load += new System.EventHandler(this.MainMenuUserControl_Load);
             this.ResumeLayout(false);
 
         }

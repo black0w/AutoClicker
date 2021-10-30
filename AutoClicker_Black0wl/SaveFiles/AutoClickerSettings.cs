@@ -56,16 +56,20 @@ namespace AutoClicker_Black0wl.SaveFiles
                 return result;
 
             }
-            catch (Exception ex) { return new AutoClickerSettings(); }
+            catch (Exception ex)
+            {
+               
+                return new AutoClickerSettings();
+            }
         }
     }
 
     public class AutoClickerSettings
     {
-        public string start_stop_btn            { get; set; }
-        public bool holdButton                  { get; set; }
-        public string scan_button               { get; set; }
-        public List<Coords> coords              { get; set; }
+        public string start_stop_btn { get; set; }
+        public bool holdButton { get; set; }
+        public string scan_button { get; set; }
+        public List<Coords> coords { get; set; }
     }
 
     public class Coords

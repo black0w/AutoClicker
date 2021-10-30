@@ -20,7 +20,7 @@ namespace AutoClicker_Black0wl.User_Controls
         private string loggedKey;
         private bool scanButton = false;
         private UserControl control;
-        public SettingsUserControl_AutoClicker(UserControl _control,string currentKey, bool buttonHold, string scanButton)
+        public SettingsUserControl_AutoClicker(UserControl _control, string currentKey, bool buttonHold, string scanButton)
         {
             InitializeComponent();
             control = _control;
@@ -28,10 +28,16 @@ namespace AutoClicker_Black0wl.User_Controls
             enable_hold_button.Checked = buttonHold;
             scanned_scan_button_textbox.Text = scanButton;
         }
-
+        public SettingsUserControl_AutoClicker()
+        {
+            InitializeComponent();
+        }
         private void back_button_Click(object sender, EventArgs e)
         {
-            MainForm.GetInstance().SwitchControls(control);
+            if (control == null)
+                MainForm.GetInstance().SwitchControls(new MainMenuUserControl());
+            else
+                MainForm.GetInstance().SwitchControls(control);
         }
 
         private void scan_key_button_Click(object sender, EventArgs e)
@@ -59,7 +65,7 @@ namespace AutoClicker_Black0wl.User_Controls
                     loggedScanKey = string.Empty;
                     loggedScanKey = loggedKey.ToString();
                     scanned_scan_button_textbox.Text = loggedScanKey;
-                    
+
                 }
             }
             if (!scanButton)
@@ -79,20 +85,27 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void save_settings_button_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(loggedScanKey) && string.IsNullOrEmpty(currentKey))
+            {
+                MessageBox.Show("Please set atleast one hotkey before saving!", "Warning", MessageBoxButtons.OK);
+                return;
+            }
+
             if (AutoClickerUserControl.GetInstance() != null)
             {
                 AutoClickerUserControl.GetInstance().buttonHold = enable_hold_button.Checked;
                 AutoClickerUserControl.GetInstance().start_stop_btn = scanned_key_textbox.Text;
             }
-            if(MultiClickerUserControl.GetInstance() != null)
+            if (MultiClickerUserControl.GetInstance() != null)
             {
-                //MultiClickerUserControl.GetInstance(). = enable_hold_button.Checked;
-                //MultiClickerUserControl.GetInstance().start_stop_btn = scanned_key_textbox.Text;
+                MultiClickerUserControl.GetInstance().buttonHold = enable_hold_button.Checked;
+                MultiClickerUserControl.GetInstance().start_stop_btn = scanned_key_textbox.Text;
+                MultiClickerUserControl.GetInstance().scan_button = scanned_scan_button_textbox.Text;
             }
 
-            
-                AutoClickerGlobalSettings.SaveToFile(scanned_key_textbox.Text, enable_hold_button.Checked, new List<Coords>(), scanned_scan_button_textbox.Text);
-            
+
+            AutoClickerGlobalSettings.SaveToFile(scanned_key_textbox.Text, enable_hold_button.Checked, new List<Coords>(), scanned_scan_button_textbox.Text);
+
 
         }
 

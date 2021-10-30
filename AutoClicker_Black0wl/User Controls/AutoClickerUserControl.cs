@@ -35,7 +35,7 @@ namespace AutoClicker_Black0wl.User_Controls
 
         public bool buttonHold = false;
         public string start_stop_btn;
-        public string scan_btn;
+        public string scan_button;
 
         public AutoClickerUserControl()
         {
@@ -43,11 +43,15 @@ namespace AutoClicker_Black0wl.User_Controls
             SINGLETON = this;
             _globalStartHook = new GlobalKeyboardHook();
             _globalStartHook.KeyboardPressed += OnKeyPressedStart;
+
             var result = AutoClickerGlobalSettings.ReadFromJson();
+
             start_stop_btn = result.start_stop_btn;
             currentKey = start_stop_btn;
             buttonHold = result.holdButton;
-            scan_btn = result.scan_button;
+            scan_button = result.scan_button;
+
+
         }
 
         public static AutoClickerUserControl GetInstance() => SINGLETON;
@@ -118,11 +122,11 @@ namespace AutoClicker_Black0wl.User_Controls
             if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
             {
                 Keys loggedKey = e.KeyboardData.Key;
-                if(start_stop_btn!= null)
-                if (loggedKey == (Keys)Enum.Parse(typeof(Keys), start_stop_btn))
-                {
-                    //if (!buttonHold)
-                    //{
+                if (start_stop_btn != null)
+                    if (loggedKey == (Keys)Enum.Parse(typeof(Keys), start_stop_btn))
+                    {
+                        //if (!buttonHold)
+                        //{
                         isRunning = !isRunning;
 
                         if (tokenSource != null)
@@ -137,7 +141,7 @@ namespace AutoClicker_Black0wl.User_Controls
                             else
                                 DoMouseClick(new Point(0, 0), false);
                         }
-                }
+                    }
             }
         }
 
@@ -177,8 +181,15 @@ namespace AutoClicker_Black0wl.User_Controls
                 CancellationToken token = tokenSource.Token;
                 Task.Factory.StartNew(() =>
                 {
+
                     if (delayed_start)
                         Thread.Sleep((int)delayed_seconds_numeric.Value * 1000);
+
+                    using (var soundPlayer = new SoundPlayer(Properties.Resources.switch_3))
+                    {
+                        soundPlayer.Play(); // can also use soundPlayer.PlaySync()
+                    }
+
                     while (!token.IsCancellationRequested)
                     {
                         Thread.Sleep(10);
@@ -247,7 +258,7 @@ namespace AutoClicker_Black0wl.User_Controls
 
 
         private void settings_button_Click(object sender, EventArgs e)
-            => MainForm.GetInstance().SwitchControls(new SettingsUserControl_AutoClicker(this,currentKey, buttonHold, scan_btn));
+            => MainForm.GetInstance().SwitchControls(new SettingsUserControl_AutoClicker(this, currentKey, buttonHold, scan_button));
 
         private void label4_Click(object sender, EventArgs e)
         {

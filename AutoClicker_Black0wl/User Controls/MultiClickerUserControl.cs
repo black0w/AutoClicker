@@ -43,24 +43,29 @@ namespace AutoClicker_Black0wl.User_Controls
         public MultiClickerUserControl()
         {
             InitializeComponent();
+            saved_locations_combobox.DisplayMember = "Name";
+            saved_locations_combobox.ValueMember = "Points";
+            SINGLETON = this;
+
+            var result = AutoClickerGlobalSettings.ReadFromJson();
+            if (result == null)
+            {
+                this.Dispose();
+            }
+
+            start_stop_btn = result.start_stop_btn;
+            MessageBox.Show(start_stop_btn);
+            currentKey = start_stop_btn;
+            buttonHold = result.holdButton;
+            coords = result.coords;
+            scan_button = result.scan_button;
+
             if (!string.IsNullOrEmpty(start_stop_btn) && !string.IsNullOrEmpty(scan_button))
             {
                 _globalStartHook = new GlobalKeyboardHook();
                 _globalStartHook.KeyboardPressed += OnKeyPressedStart;
             }
-            saved_locations_combobox.DisplayMember = "Name";
-            saved_locations_combobox.ValueMember = "Points";
-            SINGLETON = this;
-            var result = AutoClickerGlobalSettings.ReadFromJson();
-            if(result == null)
-            {
-                this.Dispose();
-            }
-            start_stop_btn = result.start_stop_btn;
-            currentKey = start_stop_btn;
-            buttonHold = result.holdButton;
-            coords = result.coords;
-            scan_button = result.scan_button;
+
             if (coords != null)
                 foreach (var cord in coords)
                     saved_locations_combobox.Items.Add(cord);
@@ -117,6 +122,11 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void start_button_Click(object sender, EventArgs e)
         {
+            if (saved_locations_combobox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select item from the drop down menu!", "Warning");
+                return;
+            }
             isRunning = !isRunning;
             start_button.Text = isRunning ? "Stop" : "Start";
             if (isRunning)
@@ -134,6 +144,11 @@ namespace AutoClicker_Black0wl.User_Controls
                 {
                     if (loggedKey == (Keys)Enum.Parse(typeof(Keys), start_stop_btn))
                     {
+                        if (saved_locations_combobox.SelectedItem == null)
+                        {
+                            MessageBox.Show("Please select item from the drop down menu!", "Warning");
+                            return;
+                        }
                         isRunning = !isRunning;
                         start_button.Text = isRunning ? "Stop" : "Start";
                         if (isRunning)
@@ -152,6 +167,7 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void ClickThreadAsync(object item)
         {
+
             using (var soundPlayer = new SoundPlayer(Properties.Resources.switch_3))
             {
                 soundPlayer.Play(); // can also use soundPlayer.PlaySync()
@@ -163,7 +179,13 @@ namespace AutoClicker_Black0wl.User_Controls
                 foreach (var point in (sItem as Coords).Points)
                 {
                     if (!isRunning)
+                    {
+                        using (var soundPlayer = new SoundPlayer(Properties.Resources.switch_7))
+                        {
+                            soundPlayer.Play(); // can also use soundPlayer.PlaySync()
+                        }
                         return;
+                    }
 
                     DoMouseClick(point);
                     Thread.Sleep((int)delay_seconds_numeric.Value * 1000);

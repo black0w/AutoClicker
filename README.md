@@ -1,5 +1,5 @@
 # AutoClicker
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/black0w/AutoClicker?label=Version)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/black0w/AutoClicker)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/black0w/AutoClicker?label=Pull%20Requests)
 ![GitHub all releases](https://img.shields.io/github/downloads/black0w/AutoClicker/total?logo=GitHub&style=social)
 

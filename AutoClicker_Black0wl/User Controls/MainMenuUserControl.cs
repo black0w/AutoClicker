@@ -19,11 +19,15 @@ namespace AutoClicker_Black0wl.User_Controls
         {
             MainForm.GetInstance().SwitchControls(new AutoClickerUserControl());
         }
-       
+
         private void multi_clicker_btn_Click(object sender, EventArgs e)
         {
             MainForm.GetInstance().SwitchControls(new MultiClickerUserControl());
         }
 
+        private void about_btn_Click(object sender, EventArgs e)
+        {
+           MessageBox.Show("AutoClicker Made By Black0wl \nGitHub: https://github.com/black0w/ \nIcons Made By: https://www.freepik.com", "About", MessageBoxButtons.OK);
+        }
     }
 }

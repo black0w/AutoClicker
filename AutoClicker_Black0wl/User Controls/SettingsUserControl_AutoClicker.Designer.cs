@@ -91,6 +91,7 @@ namespace AutoClicker_Black0wl.User_Controls
             this.label5.AutoSize = true;
             this.label5.Enabled = false;
             this.label5.Font = new System.Drawing.Font("Microsoft Tai Le", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.Control;
             this.label5.Location = new System.Drawing.Point(83, 14);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(139, 19);
@@ -126,6 +127,7 @@ namespace AutoClicker_Black0wl.User_Controls
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.SystemColors.Control;
             this.label4.Location = new System.Drawing.Point(50, 40);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(186, 26);
@@ -215,6 +217,7 @@ namespace AutoClicker_Black0wl.User_Controls
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 13F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.SystemColors.Control;
             this.label1.Location = new System.Drawing.Point(2, 144);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(273, 25);

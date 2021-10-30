@@ -2,6 +2,7 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/black0w/AutoClicker)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/black0w/AutoClicker?label=Pull%20Requests)
 ![GitHub all releases](https://img.shields.io/github/downloads/black0w/AutoClicker/total?logo=GitHub&style=social)
+![GitHub contributors](https://img.shields.io/github/contributors/black0w/AutoClicker?color=%2300f00&label=Contributors)
 
 Small and simple auto clicker written in C#( .Net Framework ) which allows you to emulate mouse clicks and most of the keyboard buttons aswell as allowing you to choose specific points on the screen to click in order.
 

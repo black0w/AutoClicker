@@ -152,7 +152,6 @@ namespace AutoClicker_Black0wl
             this.user_controls_holder_flp.Name = "user_controls_holder_flp";
             this.user_controls_holder_flp.Size = new System.Drawing.Size(275, 313);
             this.user_controls_holder_flp.TabIndex = 2;
-            this.user_controls_holder_flp.Paint += new System.Windows.Forms.PaintEventHandler(this.user_controls_holder_flp_Paint);
             // 
             // panel2
             // 

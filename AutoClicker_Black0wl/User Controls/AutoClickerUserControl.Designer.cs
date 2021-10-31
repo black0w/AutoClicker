@@ -154,7 +154,6 @@ namespace AutoClicker_Black0wl.User_Controls
             this.label4.Size = new System.Drawing.Size(175, 26);
             this.label4.TabIndex = 5;
             this.label4.Text = "Keyboard Button";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // scan_key_button
             // 
@@ -210,7 +209,6 @@ namespace AutoClicker_Black0wl.User_Controls
             this.scanned_key_textbox.Size = new System.Drawing.Size(151, 29);
             this.scanned_key_textbox.TabIndex = 4;
             this.scanned_key_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.scanned_key_textbox.TextChanged += new System.EventHandler(this.scanned_key_textbox_TextChanged);
             // 
             // start_button
             // 

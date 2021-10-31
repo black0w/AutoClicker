@@ -2,22 +2,20 @@
 using InputManager;
 using System;
 using System.Drawing;
-using System.Media;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
 namespace AutoClicker_Black0wl.User_Controls
 {
     public partial class AutoClickerUserControl : UserControl
     {
-
         private GlobalKeyboardHook _globalKeyboardHook;
         private GlobalKeyboardHook _globalStartHook;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
+
         //Mouse actions
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
@@ -27,8 +25,9 @@ namespace AutoClicker_Black0wl.User_Controls
         private bool mouseClick = false;
         private bool isRunning = false;
         private string currentKey = string.Empty;
-        private Keys ck;
+        private Keys keyBoardButton;
         private bool delayed_start = false;
+
         private CancellationTokenSource tokenSource;
 
         private static AutoClickerUserControl SINGLETON;
@@ -50,8 +49,6 @@ namespace AutoClicker_Black0wl.User_Controls
             currentKey = start_stop_btn;
             buttonHold = result.holdButton;
             scan_button = result.scan_button;
-
-
         }
 
         public static AutoClickerUserControl GetInstance() => SINGLETON;
@@ -107,7 +104,7 @@ namespace AutoClicker_Black0wl.User_Controls
             {
                 // Now you can access both, the key and virtual code
                 Keys loggedKey = e.KeyboardData.Key;
-                ck = loggedKey;
+                keyBoardButton = loggedKey;
                 currentKey = string.Empty;
                 currentKey = loggedKey.ToString();
                 scanned_key_textbox.Text = currentKey;
@@ -116,38 +113,44 @@ namespace AutoClicker_Black0wl.User_Controls
 
             scan_key_button.Text = "Scan Key";
         }
-        bool isHolding = false;
+
         private void OnKeyPressedStart(object sender, GlobalKeyboardHookEventArgs e)
         {
             if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
             {
                 Keys loggedKey = e.KeyboardData.Key;
                 if (start_stop_btn != null)
-                    if (loggedKey == (Keys)Enum.Parse(typeof(Keys), start_stop_btn))
-                    {
-                        //if (!buttonHold)
-                        //{
-                        isRunning = !isRunning;
+                {
+                    CheckPressedButton(loggedKey);
+                }
+            }
+        }
 
-                        if (tokenSource != null)
-                            tokenSource.Cancel();
+        private void CheckPressedButton(Keys loggedKey)
+        {
+            if (loggedKey == (Keys)Enum.Parse(typeof(Keys), start_stop_btn))
+            {
+                isRunning = !isRunning;
 
-                        if (!mouseClick)
-                            EmulateButton();
-                        else
-                        {
-                            if (left_mouse_checkbox.Checked)
-                                DoMouseClick(new Point(0, 0), true);
-                            else
-                                DoMouseClick(new Point(0, 0), false);
-                        }
-                    }
+                if (tokenSource != null)
+                    tokenSource.Cancel();
+
+                if (!mouseClick)
+                    EmulateButton();
+                else
+                {
+                    if (left_mouse_checkbox.Checked)
+                        DoMouseClick(new Point(0, 0), true);
+                    else
+                        DoMouseClick(new Point(0, 0), false);
+                }
             }
         }
 
         private void enable_delayed_start_Click(object sender, EventArgs e)
         {
             delayed_start = enable_delayed_start.Checked;
+
             if (enable_delayed_start.Checked)
                 delayed_seconds_numeric.Enabled = true;
             else
@@ -174,21 +177,16 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void DoMouseClick(Point point, bool left)
         {
-
             if (isRunning)
             {
                 tokenSource = new CancellationTokenSource();
                 CancellationToken token = tokenSource.Token;
                 Task.Factory.StartNew(() =>
                 {
-
                     if (delayed_start)
                         Thread.Sleep((int)delayed_seconds_numeric.Value * 1000);
 
-                    using (var soundPlayer = new SoundPlayer(Properties.Resources.switch_3))
-                    {
-                        soundPlayer.Play(); // can also use soundPlayer.PlaySync()
-                    }
+                    SoundPlayer.PlayStartSound();
 
                     while (!token.IsCancellationRequested)
                     {
@@ -205,11 +203,9 @@ namespace AutoClicker_Black0wl.User_Controls
 
         private void EmulateButton()
         {
-
             start_button.Text = isRunning ? "Stop" : "Start";
             if (isRunning)
             {
-
                 tokenSource = new CancellationTokenSource();
                 CancellationToken token = tokenSource.Token;
 
@@ -217,62 +213,35 @@ namespace AutoClicker_Black0wl.User_Controls
                 {
                     if (delayed_start)
                         Thread.Sleep((int)delayed_seconds_numeric.Value * 1000);
-                    using (var soundPlayer = new SoundPlayer(Properties.Resources.switch_3))
-                    {
-                        soundPlayer.Play(); // can also use soundPlayer.PlaySync()
-                    }
+
+                    SoundPlayer.PlayStartSound();
                     while (!token.IsCancellationRequested)
                     {
                         try
                         {
-                            Keyboard.KeyDown(ck);
+                            Keyboard.KeyDown(keyBoardButton);
                             Thread.Sleep(100);
-                            Keyboard.KeyUp(ck);
-                            // SendKeys.SendWait("{" + currentKey + "}");
-
+                            Keyboard.KeyUp(keyBoardButton);
                         }
                         catch (ArgumentException)
                         {
-                            using (var soundPlayer = new SoundPlayer(Properties.Resources.sci_fi_beeperror_179_sound_effect_97326661))
-                            {
-                                soundPlayer.Play(); // can also use soundPlayer.PlaySync()
-                            }
                             MessageBox.Show("Please try another button, this one is not supported by windows :/", "Alert");
                             if (InvokeRequired)
-                            {
                                 Invoke(new MethodInvoker(delegate { guna2Button1_Click(new object(), new EventArgs()); }));
-                            }
 
                             return;
                         }
                         Thread.Sleep((int)guna2NumericUpDown1.Value);
                     }
-                    //  Keyboard.KeyUp(ck);
-                    using (var soundPlayer = new SoundPlayer(Properties.Resources.switch_7))
-                    {
-                        soundPlayer.Play(); // can also use soundPlayer.PlaySync()
-                    }
+                    SoundPlayer.PlayStopSound();
                 });
             }
         }
 
-
         private void settings_button_Click(object sender, EventArgs e)
             => MainForm.GetInstance().SwitchControls(new SettingsUserControl_AutoClicker(this, currentKey, buttonHold, scan_button));
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void scanned_key_textbox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void back_button_Click(object sender, EventArgs e)
-        {
-            MainForm.GetInstance().SwitchControls(new MainMenuUserControl());
-        }
+           => MainForm.GetInstance().SwitchControls(new MainMenuUserControl());
     }
 }

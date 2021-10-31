@@ -15,11 +15,14 @@ namespace AutoClicker_Black0wl.User_Controls
     {
         private GlobalKeyboardHook _globalKeyboardHook;
         private GlobalKeyboardHook _globalKeyboardScanHook;
+
         private string currentKey = string.Empty;
         private string loggedScanKey;
         private string loggedKey;
+
         private bool scanButton = false;
         private UserControl control;
+
         public SettingsUserControl_AutoClicker(UserControl _control, string currentKey, bool buttonHold, string scanButton)
         {
             InitializeComponent();
@@ -28,10 +31,8 @@ namespace AutoClicker_Black0wl.User_Controls
             enable_hold_button.Checked = buttonHold;
             scanned_scan_button_textbox.Text = scanButton;
         }
-        public SettingsUserControl_AutoClicker()
-        {
-            InitializeComponent();
-        }
+        public SettingsUserControl_AutoClicker() => InitializeComponent();
+
         private void back_button_Click(object sender, EventArgs e)
         {
             if (control == null)
@@ -51,9 +52,8 @@ namespace AutoClicker_Black0wl.User_Controls
         {
             if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
             {
-
-                // Now you can access both, the key and virtual code
                 loggedKey = e.KeyboardData.Key.ToString();
+
                 if (!scanButton)
                 {
                     currentKey = string.Empty;
@@ -68,6 +68,7 @@ namespace AutoClicker_Black0wl.User_Controls
 
                 }
             }
+
             if (!scanButton)
             {
                 _globalKeyboardHook.Dispose();
@@ -103,10 +104,7 @@ namespace AutoClicker_Black0wl.User_Controls
                 MultiClickerUserControl.GetInstance().scan_button = scanned_scan_button_textbox.Text;
             }
 
-
             AutoClickerGlobalSettings.SaveToFile(scanned_key_textbox.Text, enable_hold_button.Checked, new List<Coords>(), scanned_scan_button_textbox.Text);
-
-
         }
 
         private void scan_button_button_Click(object sender, EventArgs e)

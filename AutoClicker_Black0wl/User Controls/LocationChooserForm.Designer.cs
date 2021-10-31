@@ -32,7 +32,7 @@ namespace AutoClicker_Black0wl.User_Controls
             this.label2 = new System.Windows.Forms.Label();
             this.location_number_numeric = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.scan_positions_button = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.close_button = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.locations_name_textbox = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.location_number_numeric)).BeginInit();
@@ -78,7 +78,6 @@ namespace AutoClicker_Black0wl.User_Controls
             0,
             0,
             0});
-            this.location_number_numeric.ValueChanged += new System.EventHandler(this.location_number_numeric_ValueChanged);
             // 
             // scan_positions_button
             // 
@@ -104,29 +103,29 @@ namespace AutoClicker_Black0wl.User_Controls
             this.scan_positions_button.Text = "Scan Positions";
             this.scan_positions_button.Click += new System.EventHandler(this.scan_positions_button_Click);
             // 
-            // guna2Button1
+            // close_button
             // 
-            this.guna2Button1.AutoRoundedCorners = true;
-            this.guna2Button1.BorderRadius = 14;
-            this.guna2Button1.BorderThickness = 2;
-            this.guna2Button1.CheckedState.Parent = this.guna2Button1;
-            this.guna2Button1.CustomImages.Parent = this.guna2Button1;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.DisabledState.Parent = this.guna2Button1;
-            this.guna2Button1.FillColor = System.Drawing.Color.DimGray;
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.HoverState.Parent = this.guna2Button1;
-            this.guna2Button1.Location = new System.Drawing.Point(124, 137);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
-            this.guna2Button1.Size = new System.Drawing.Size(75, 30);
-            this.guna2Button1.TabIndex = 26;
-            this.guna2Button1.Text = "Cancel";
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.close_button.AutoRoundedCorners = true;
+            this.close_button.BorderRadius = 14;
+            this.close_button.BorderThickness = 2;
+            this.close_button.CheckedState.Parent = this.close_button;
+            this.close_button.CustomImages.Parent = this.close_button;
+            this.close_button.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.close_button.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.close_button.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.close_button.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.close_button.DisabledState.Parent = this.close_button;
+            this.close_button.FillColor = System.Drawing.Color.DimGray;
+            this.close_button.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.close_button.ForeColor = System.Drawing.Color.White;
+            this.close_button.HoverState.Parent = this.close_button;
+            this.close_button.Location = new System.Drawing.Point(124, 137);
+            this.close_button.Name = "close_button";
+            this.close_button.ShadowDecoration.Parent = this.close_button;
+            this.close_button.Size = new System.Drawing.Size(75, 30);
+            this.close_button.TabIndex = 26;
+            this.close_button.Text = "Cancel";
+            this.close_button.Click += new System.EventHandler(this.close_button_Click);
             // 
             // guna2Button2
             // 
@@ -189,7 +188,7 @@ namespace AutoClicker_Black0wl.User_Controls
             this.ControlBox = false;
             this.Controls.Add(this.locations_name_textbox);
             this.Controls.Add(this.guna2Button2);
-            this.Controls.Add(this.guna2Button1);
+            this.Controls.Add(this.close_button);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.location_number_numeric);
             this.Controls.Add(this.scan_positions_button);
@@ -208,7 +207,7 @@ namespace AutoClicker_Black0wl.User_Controls
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2NumericUpDown location_number_numeric;
         private Guna.UI2.WinForms.Guna2Button scan_positions_button;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button close_button;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2TextBox locations_name_textbox;
     }

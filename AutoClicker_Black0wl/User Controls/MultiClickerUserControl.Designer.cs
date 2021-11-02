@@ -155,6 +155,11 @@ namespace AutoClicker_Black0wl.User_Controls
             this.number_of_loops_numeric.ForeColor = System.Drawing.Color.Black;
             this.number_of_loops_numeric.Location = new System.Drawing.Point(155, 184);
             this.number_of_loops_numeric.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.number_of_loops_numeric.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.number_of_loops_numeric.Minimum = new decimal(new int[] {
             1,
             0,

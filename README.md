@@ -6,8 +6,8 @@
 
 Small and simple auto clicker written in C#( .Net Framework ) which allows you to emulate mouse clicks and most of the keyboard buttons aswell as allowing you to choose specific points on the screen to click in order.
 
-Feel free to fork and upgrade it :)
-
+Feel free to use it and update it however you want :)
+For any bugs and ideas, do not hesitate to write in the discussions tab
 ## Main Screen
 
 ![Screenshot_2](https://user-images.githubusercontent.com/19394845/139529767-d392757b-38f6-4b7a-a4e2-b0728f9bebcb.png)

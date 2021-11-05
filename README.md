@@ -4,12 +4,12 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/black0w/AutoClicker/total?logo=GitHub&style=social)
 ![GitHub contributors](https://img.shields.io/github/contributors/black0w/AutoClicker?color=%2300f00&label=Contributors)
 
-I AM NOT SURE IF STEAM COUNTS THE AUTOCLICKER AS CHEAT SO USE UNDER YOUR OWN RISK
-
 Small and simple auto clicker written in C#( .Net Framework ) which allows you to emulate mouse clicks and most of the keyboard buttons aswell as allowing you to choose specific points on the screen to click in order.
 
 Feel free to use it and update it however you want :)
 For any bugs and ideas, do not hesitate to write in the discussions tab
+
+
 ## Main Screen
 
 ![Screenshot_2](https://user-images.githubusercontent.com/19394845/139529767-d392757b-38f6-4b7a-a4e2-b0728f9bebcb.png)
@@ -38,4 +38,11 @@ By choosing the number of positions and clicking on the "Scan Positions" button,
 Next step is to start the auto clicker, here you can either start the auto clicker via the button "Start" or via the hotkey you've chosen in the settings menu. Whenever the auto clicks loop finishes, the auto clicker will automatically stop itself.
 
 Additional Info:
+
 Whenever you start/stop the auto clicker a sound will be played.
+
+DISCLAIMER: 
+
+I AM NOT SURE IF STEAM COUNTS THE AUTOCLICKER AS CHEAT SO USE UNDER YOUR OWN RISK
+
+

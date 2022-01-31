@@ -4,7 +4,7 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/black0w/AutoClicker/total?logo=GitHub&style=social)
 ![GitHub contributors](https://img.shields.io/github/contributors/black0w/AutoClicker?color=%2300f00&label=Contributors)
 
-Small and simple auto clicker written in C#( .Net Framework ) which allows you to emulate mouse clicks and most of the keyboard buttons aswell as allowing you to choose specific points on the screen to click in order.
+Small and simple auto clicker written in C#( .Net Framework ) for Windows 10 which allows you to emulate mouse clicks and most of the keyboard buttons aswell as allowing you to choose specific points on the screen to click in order.
 
 Feel free to use it and update it however you want :)
 For any bugs and ideas, do not hesitate to write in the discussions tab
